@@ -1,47 +1,46 @@
-import React from "react";
-import { View,Text,Image,TouchableOpacity,StyleSheet,FlatList,SafeAreaView } from "react-native";
-import{useDispatch} from 'react-redux';
-import{addItemCart} from '../redux/actions';
+import React, { useContext } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { CartContext } from '../context/CartContext';
 
-const products =[
-    {id:1, name:'Office Wear',description:'Reversible angora cardigan',price: 120,image:require('../assets/dress1.png')},
-    {id:2, name:'Black',description:'Reversible angora cardigan',price: 120,image:require('../assets/dress2.png.')},
-    {id:3, name:'Church Wear',description:'Reversible angora cardigan',price: 120,image:require('../assets/dress3.png.')},
-    {id:4, name:'Lamerei',description:'Reversible angora cardigan',price: 120,image:require('../assets/dress4.png.')},
-    {id:5, name:'21WN',description:'Reversible angora cardigan',price: 120,image:require('../assets/dress5.png')},
-    {id:6, name:'Lopo',description:'Reversible angora cardigan',price: 120,image:require('../assets/dress6.png')},
-    {id:7, name:'21WN',description:'Reversible angora cardigan',price: 120,image:require('../assets/dress7.png')},
-    {id:1, name:'lame',description:'Reversible angora cardigan',price: 120,image:require('../assets/dress3.png')},
+const products = [
+  { id: 1, name: 'Office Wear', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress1.png') },
+  { id: 2, name: 'Black', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress2.png') },
+  { id: 3, name: 'Church Wear', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress3.png') },
+  { id: 4, name: 'Lamerei', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress4.png') },
+  { id: 5, name: '21WN', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress5.png') },
+  { id: 6, name: 'Lopo', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress6.png') },
+  { id: 7, name: '21WN', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress7.png') },
+  { id: 8, name: 'lame', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress3.png') },
 ];
 
-const ourstory=({navigation})=>{
-   const dispatch =useDispatch();
-   
-   const renderItem =({item})=>(
-    <View style={Styles.product}>
-     <View style={styles.imageContainer}>
-      <Image source={item.image} style={styles.image}/>
-        <TouchableOpacity style ={styles.addButton}onPress={()=> dispatch(addItemCart(item))}>
+const Ourstory = ({ navigation }) => {
+  const { addItemToCart } = useContext(CartContext);
+
+  const renderItem = ({ item }) => (
+    <View style={styles.product}>
+      <View style={styles.imageContainer}>
+        <Image source={item.image} style={styles.image} />
+        <TouchableOpacity style={styles.addButton} onPress={() => addItemToCart(item)}>
           <Text style={styles.addButtonText}>+</Text>
         </TouchableOpacity>
       </View>
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.description}>{item.description}</Text>
-      <Text style ={styles.price}>${item.price}</Text>
-     </View>
-   );
+      <Text style={styles.price}>${item.price}</Text>
+    </View>
+  );
 
-   return (
-    <SafeAreaView style ={styles.SafeArea}>
-     <View style={styles.container}>
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
         <View style={styles.header}>
-            <TouchableOpacity style={styles.menuButton}>
-                <Image source={require('../assets/Menu.png')} style={styles.icon}/>
-            </TouchableOpacity>
-            <Image source={require('../assets/Logo.png')} style={styles.logo}/>
-            <View style={styles.headerIcons}>
-                <TouchableOpacity style={styles.headerButton}>
-                <Image source={require('../assets/Search.png')} style={styles.icon} />
+          <TouchableOpacity style={styles.menuButton}>
+            <Image source={require('../assets/Menu.png')} style={styles.icon} />
+          </TouchableOpacity>
+          <Image source={require('../assets/Logo.png')} style={styles.logo} />
+          <View style={styles.headerIcons}>
+            <TouchableOpacity style={styles.headerButton}>
+              <Image source={require('../assets/Search.png')} style={styles.icon} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.headerButton}>
               <Image source={require('../assets/shoppingBag.png')} style={styles.icon} />
@@ -181,4 +180,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ourstory;
+export default Ourstory;
